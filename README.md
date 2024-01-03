@@ -11,3 +11,9 @@ A program that illustrates basic investment calculations using GO functions and 
 
         go run cmd/investcalc/investment_calculator.go
 
+## Bank
+A program that illustrates if/else, for, read/write files, and basic error handling.
+
+        go run cmd/bank/bank.go
+
+
