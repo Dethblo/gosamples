@@ -16,4 +16,8 @@ A program that illustrates if/else, for, read/write files, and basic error handl
 
         go run cmd/bank/bank.go
 
+## Structs
+A program which illustrates basic structure usage.
+
+        go run cmd/structs/structs.go
 
