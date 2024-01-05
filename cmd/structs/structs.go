@@ -10,13 +10,14 @@ func main() {
 	userLastName := getUserData("Please enter your last name: ")
 	userBirthdate := getUserData("Please enter your birthdate (MM/DD/YYYY): ")
 
-	var appUser user.User
-	// create instance using the constructor (factory) function
+	var appUser *user.User
+	// create instance using the constructor (factory) function (which returns a pointer)
 	appUser = user.New(userFirstName, userLastName, userBirthdate)
 
 	// create another instance with empty values
 	// anotherUser := user {}
 
+	// create instance using the constructor (factory) function (no pointer)
 	admin := user.NewAdmin("ADMIN", "ISGOD", "----------", "admin@mycompany.com", "thepassword")
 	fmt.Println("The Admin details:")
 	admin.OutputUserDetails()

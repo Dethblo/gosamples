@@ -49,11 +49,11 @@ func (u *User) ClearUserName() {
 }
 
 // New a common design pattern in GO is to create a constructor (or factory) function to make instances
-// so that additional validation logic may be performed.  Optionally: the return could be a pointer
-// so that extra copies are not made.
-func New(fn, ln, bd string) User {
+// so that additional validation logic may be performed.  This implementation illustrates returning a pointer
+// so that extra copies are not made, but this is often not needed.
+func New(fn, ln, bd string) *User {
 	// return an instance by making a struct literal
-	return User{
+	return &User{
 		FirstName: fn,
 		LastName:  ln,
 		Birthdate: bd,
