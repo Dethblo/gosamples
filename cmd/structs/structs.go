@@ -17,6 +17,11 @@ func main() {
 	// create another instance with empty values
 	// anotherUser := user {}
 
+	admin := user.NewAdmin("ADMIN", "ISGOD", "----------", "admin@mycompany.com", "thepassword")
+	fmt.Println("The Admin details:")
+	admin.OutputUserDetails()
+
+	fmt.Println("The Supplied User details:")
 	appUser.OutputUserDetails()
 	appUser.ClearUserName()
 	appUser.OutputUserDetails()
