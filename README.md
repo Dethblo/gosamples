@@ -25,3 +25,9 @@ A program which illustrates basic structure usage.
 A program that asks the user for input, keeps the data in structs, and saves it in JSON format to a file with the help of struct tags and the encoding/json standard library.
 
         go run cmd/note/note.go
+
+## Lists
+A program that illustrates usage of slices of struct types.
+
+        go run cmd/note/note.go
+
