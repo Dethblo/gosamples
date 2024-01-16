@@ -26,8 +26,8 @@ A program that asks the user for input, keeps the data in structs, and saves it 
 
         go run cmd/note/note.go
 
-## Lists
-A program that illustrates usage of slices of struct types.
+## Collections
+A program that illustrates usage of collections in Go.
 
-        go run cmd/note/note.go
+        go run cmd/collections/collections.go
 

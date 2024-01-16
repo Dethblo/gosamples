@@ -8,7 +8,7 @@ type Product struct {
 	Price       float64
 }
 
-func main() {
+func listFun() {
 	// a slice (dynamic array) of products
 	products := []Product{
 		{
@@ -64,4 +64,30 @@ func main() {
 	newList = append(newList, specialProducts...)
 	fmt.Println(newList)
 
+}
+
+func mapFun() {
+	var testMap map[string]string
+	testMap = make(map[string]string)
+	testMap["One"] = "Uno"
+	testMap["Two"] = "Dos"
+
+	fmt.Println(testMap)
+
+	websites := map[string]string{
+		"Google":              "https://google.com",
+		"Amazon Web Services": "https://aws.com",
+	}
+
+	fmt.Println(websites)
+	fmt.Println(websites["Google"])
+
+	delete(websites, "Google")
+	fmt.Println(websites)
+}
+
+func main() {
+	// examples of lists
+	listFun()
+	mapFun()
 }
