@@ -2,9 +2,26 @@ package functions
 
 import "fmt"
 
+// DoMain the main caller of the examples.
+func DoMain() {
+	numbers := []int{1, 2, 3, 4}
+	doubled := transformNumbers(&numbers, getTransformerFn(false))
+	tripled := transformNumbers(&numbers, getTransformerFn(true))
+	squared := transformNumbers(&numbers, func(number int) int {
+		return number * number
+	})
+	hundred := transformNumbers(&numbers, createTransformer(100))
+
+	fmt.Println(doubled)
+	fmt.Println(tripled)
+	fmt.Println(squared)
+	fmt.Println(hundred)
+}
+
+// a type used as a shortcut for the function signature.
 type transformFn func(int) int
 
-func TransformNumbers(numbers *[]int, transform transformFn) []int {
+func transformNumbers(numbers *[]int, transform transformFn) []int {
 	dNumbers := []int{}
 	for _, val := range *numbers {
 		dNumbers = append(dNumbers, transform(val))
@@ -12,7 +29,7 @@ func TransformNumbers(numbers *[]int, transform transformFn) []int {
 	return dNumbers
 }
 
-func GetTransformerFn(doTriple bool) transformFn {
+func getTransformerFn(doTriple bool) transformFn {
 	if doTriple {
 		return triple
 	} else {
@@ -28,23 +45,8 @@ func triple(number int) int {
 	return number * 3
 }
 
-func CreateTransformer(factor int) func(int) int {
+func createTransformer(factor int) func(int) int {
 	return func(number int) int {
 		return number * factor
 	}
-}
-
-func DoMain() {
-	numbers := []int{1, 2, 3, 4}
-	doubled := TransformNumbers(&numbers, GetTransformerFn(false))
-	tripled := TransformNumbers(&numbers, GetTransformerFn(true))
-	squared := TransformNumbers(&numbers, func(number int) int {
-		return number * number
-	})
-	hundred := TransformNumbers(&numbers, CreateTransformer(100))
-
-	fmt.Println(doubled)
-	fmt.Println(tripled)
-	fmt.Println(squared)
-	fmt.Println(hundred)
 }
