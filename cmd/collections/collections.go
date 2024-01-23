@@ -64,6 +64,11 @@ func listFun() {
 	newList = append(newList, specialProducts...)
 	fmt.Println(newList)
 
+	fmt.Println("Each item in newList:")
+	for index, value := range newList {
+		fmt.Printf("\tItem[%v] = %v\n", index, value)
+	}
+
 }
 
 func mapFun() {
@@ -73,6 +78,11 @@ func mapFun() {
 	testMap["Two"] = "Dos"
 
 	fmt.Println(testMap)
+
+	fmt.Println("Each item in testMap:")
+	for key, value := range testMap {
+		fmt.Printf("\tItem key: [%v], Item value: [%v]\n", key, value)
+	}
 
 	websites := map[string]string{
 		"Google":              "https://google.com",
