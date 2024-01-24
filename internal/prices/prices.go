@@ -1,10 +1,8 @@
 package prices
 
 import (
-	"bufio"
 	"fmt"
-	"os"
-	"strconv"
+	"github.com/Dethblo/godethblo/internal/filemanager"
 )
 
 type TaxIncludedPriceJob struct {
@@ -33,50 +31,14 @@ func NewTaxIncludedPriceJob(taxRate float64) *TaxIncludedPriceJob {
 }
 
 func (job *TaxIncludedPriceJob) LoadData() {
-	file, err := os.Open("prices.txt")
-	if err != nil {
-		fmt.Println("Could not open file!")
-		fmt.Println(err)
-		return
-	}
-
-	// make sure file is closed when done
-	defer func(file *os.File) {
-		err := file.Close()
-		if err != nil {
-			fmt.Println("Could not close file!")
-			fmt.Println(err)
-		}
-	}(file)
-
-	scanner := bufio.NewScanner(file)
-
-	// for each line in the file (until EOF returns false)...
-	var lines []string
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
-	}
-
-	// check for any error emitted by the scanner
-	err = scanner.Err()
-	if err != nil {
-		fmt.Println("Error reading the file!")
-		fmt.Println(err)
-		return
-	}
+	// read the data file
+	lines, err := filemanager.ReadLines("prices.txt")
 
 	// convert lines to price values
-	prices := make([]float64, len(lines))
-	for lineIndex, line := range lines {
-		floatPrice, conErr := strconv.ParseFloat(line, 64)
-		if conErr != nil {
-			fmt.Printf("Converting string to float failed for %v", line)
-			fmt.Println(err)
-			return
-		}
-
-		prices[lineIndex] = floatPrice
+	job.InputPrices, err = StringsToFloat(lines)
+	if err != nil {
+		fmt.Println(err)
+		return
 	}
 
-	job.InputPrices = prices
 }
