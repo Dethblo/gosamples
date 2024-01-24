@@ -16,6 +16,10 @@ func main() {
 		// using the Console vs Files (illustrating the usage of interfaces in design)
 		//mgr := cmdmanager.New()
 		priceJob := prices.NewTaxIncludedPriceJob(mgr, taxRate)
-		priceJob.Process()
+		err := priceJob.Process()
+		if err != nil {
+			fmt.Println("Could not process Job")
+			fmt.Println(err)
+		}
 	}
 }
