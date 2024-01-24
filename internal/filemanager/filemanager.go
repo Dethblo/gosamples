@@ -2,6 +2,7 @@ package filemanager
 
 import (
 	"bufio"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"os"
@@ -10,17 +11,11 @@ import (
 func ReadLines(fileToRead string) ([]string, error) {
 	file, err := os.Open(fileToRead)
 	if err != nil {
-		return nil, errors.New(fmt.Sprintf("Could not open file: [%v]", fileToRead))
+		return nil, errors.New(fmt.Sprintf("could not open file: [%v]", fileToRead))
 	}
 
 	// make sure file is closed when done
-	defer func(file *os.File) {
-		err := file.Close()
-		if err != nil {
-			fmt.Printf("Could not close file: [%v]\n", fileToRead)
-			fmt.Println(err)
-		}
-	}(file)
+	defer close(file)
 
 	scanner := bufio.NewScanner(file)
 
@@ -33,8 +28,35 @@ func ReadLines(fileToRead string) ([]string, error) {
 	// check for any error emitted by the scanner
 	err = scanner.Err()
 	if err != nil {
-		return nil, errors.New(fmt.Sprintf("Error reading file: [%v]", fileToRead))
+		return nil, errors.New(fmt.Sprintf("error reading file: [%v]", fileToRead))
 	}
 
 	return lines, nil
+}
+
+func WriteJson(fileToMake string, data interface{}) error {
+	file, err := os.Create(fileToMake)
+	if err != nil {
+		return errors.New(fmt.Sprintf("failed to create file: [%v]", fileToMake))
+	}
+
+	// make sure file is closed when done
+	defer close(file)
+
+	encoder := json.NewEncoder(file)
+	encoder.SetIndent("", "  ") // pretty prints the JSON
+	err = encoder.Encode(data)
+	if err != nil {
+		return errors.New("failed to convert data to JSON")
+	}
+
+	return nil
+}
+
+func close(file *os.File) {
+	err := file.Close()
+	if err != nil {
+		fmt.Printf("could not close file")
+		fmt.Println(err)
+	}
 }
