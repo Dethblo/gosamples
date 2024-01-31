@@ -1,6 +1,21 @@
 # godethblo
 A collection of Go Language code used to experiment and try different concepts.
 
+# Setup
+The code is set up to follow the GO language conventions for packaging.  The /cmd tree represents multiple GO programs (each with their own 'main').  The /internal tree is packaged code (not intended to be shared outside the applications).
+
+Reference: `https://go.dev/doc/code`
+
+## How the structure was created
+1. Create the godethblo project directory
+2. Change to the ./godethblo directory
+3. Using my Github.com repository Execute: `go mod init github.com/Dethblo/godethblo`
+4. Create the `./cmd/hello` directory and `hello.go` source code.
+5. Execute the code: `go run cmd/hello/hello.go`
+6. Create other directories and code as needed.
+
+
+# Application Examples
 ## Bank
 A program that illustrates if/else, for, read/write files, and basic error handling.
 
@@ -40,4 +55,9 @@ A program that illustrates a price calculator.  The program illustrates several 
 A program which illustrates basic structure usage.
 
         go run cmd/structs/structs.go
+
+## Thread Greet
+A program which illustrates basic usage of goroutines for a multi-threaded greet example.
+
+        go run cmd/threadgreet/threadgreet.go
 
