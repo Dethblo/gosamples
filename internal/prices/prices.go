@@ -3,6 +3,7 @@ package prices
 import (
 	"fmt"
 	"github.com/Dethblo/godethblo/internal/iomanager"
+	"sync"
 )
 
 type TaxIncludedPriceJob struct {
@@ -12,11 +13,13 @@ type TaxIncludedPriceJob struct {
 	TaxIncludedPrices map[string]string   `json:"tax_included_prices"`
 }
 
-func (job *TaxIncludedPriceJob) Process() error {
+func (job *TaxIncludedPriceJob) Process(wg *sync.WaitGroup) {
+	defer wg.Done()
+
 	// load price data from file
 	err := job.LoadData()
 	if err != nil {
-		return err
+		//return err
 	}
 
 	result := make(map[string]string)
@@ -28,10 +31,9 @@ func (job *TaxIncludedPriceJob) Process() error {
 	job.TaxIncludedPrices = result
 	err = job.IOManager.WriteResult(job)
 	if err != nil {
-		return err
+		//return err
 	}
 
-	return nil
 }
 
 func NewTaxIncludedPriceJob(iom iomanager.IOManager, taxRate float64) *TaxIncludedPriceJob {

@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"time"
 )
 
 type FileManager struct {
@@ -51,6 +52,9 @@ func (fm FileManager) WriteResult(data interface{}) error {
 	if err != nil {
 		return errors.New(fmt.Sprintf("failed to create file: [%v]", fm.OutputFilePath))
 	}
+
+	// artificially add a sleep to help illustrate usage of goroutines
+	time.Sleep(3 * time.Second)
 
 	// make sure file is closed when done
 	defer CloseIt(file)
