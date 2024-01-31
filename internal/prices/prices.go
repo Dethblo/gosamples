@@ -13,13 +13,16 @@ type TaxIncludedPriceJob struct {
 	TaxIncludedPrices map[string]string   `json:"tax_included_prices"`
 }
 
-func (job *TaxIncludedPriceJob) Process(wg *sync.WaitGroup) {
+func (job *TaxIncludedPriceJob) Process(wg *sync.WaitGroup, errorChan chan error) {
 	defer wg.Done()
+	defer close(errorChan)
 
 	// load price data from file
 	err := job.LoadData()
 	if err != nil {
 		//return err
+		errorChan <- err
+		return
 	}
 
 	result := make(map[string]string)
@@ -32,6 +35,8 @@ func (job *TaxIncludedPriceJob) Process(wg *sync.WaitGroup) {
 	err = job.IOManager.WriteResult(job)
 	if err != nil {
 		//return err
+		errorChan <- err
+		return
 	}
 
 }

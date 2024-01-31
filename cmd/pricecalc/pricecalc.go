@@ -10,8 +10,10 @@ import (
 func main() {
 	taxRates := []float64{0, 0.07, 0.1, 0.15}
 	var wg sync.WaitGroup
+	errorChans := make([]chan error, len(taxRates))
 
-	for _, taxRate := range taxRates {
+	for index, taxRate := range taxRates {
+		errorChans[index] = make(chan error)
 		mgr := filemanager.New("prices.txt", fmt.Sprintf("result_%.0f.json", taxRate*100))
 
 		// the following mgr line can be uncommented and the above line commented to switch between
@@ -19,13 +21,18 @@ func main() {
 		//mgr := cmdmanager.New()
 		priceJob := prices.NewTaxIncludedPriceJob(mgr, taxRate)
 		wg.Add(1)
-		go priceJob.Process(&wg)
+		go priceJob.Process(&wg, errorChans[index])
+	}
 
-		//if err != nil {
-		//	fmt.Println("Could not process Job")
-		//	fmt.Println(err)
-		//}
-
+	// examine all error channels
+	for index := range taxRates {
+		select {
+		case err := <-errorChans[index]:
+			if err != nil {
+				fmt.Println("Could not process Job")
+				fmt.Println(err)
+			}
+		}
 	}
 
 	// wait for all goroutines to complete
