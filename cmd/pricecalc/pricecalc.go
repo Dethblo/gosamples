@@ -26,6 +26,7 @@ func main() {
 
 	// examine all error channels
 	for index := range taxRates {
+		// select is a special keyword for selecting among multiple channels, similar to switch
 		select {
 		case err := <-errorChans[index]:
 			if err != nil {
