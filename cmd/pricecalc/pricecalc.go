@@ -1,9 +1,9 @@
 package main
 
 import (
+	"example.com/gosamples/internal/filemanager"
+	"example.com/gosamples/internal/prices"
 	"fmt"
-	"github.com/Dethblo/godethblo/internal/filemanager"
-	"github.com/Dethblo/godethblo/internal/prices"
 	"sync"
 )
 

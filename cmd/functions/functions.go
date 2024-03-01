@@ -1,8 +1,8 @@
 package main
 
 import (
+	"example.com/gosamples/internal/functions"
 	"fmt"
-	"github.com/Dethblo/godethblo/internal/functions"
 )
 
 func main() {

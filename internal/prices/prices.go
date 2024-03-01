@@ -1,8 +1,8 @@
 package prices
 
 import (
+	"example.com/gosamples/internal/iomanager"
 	"fmt"
-	"github.com/Dethblo/godethblo/internal/iomanager"
 	"sync"
 )
 

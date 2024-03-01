@@ -1,3 +1,3 @@
-module github.com/Dethblo/godethblo
+module example.com/gosamples
 
 go 1.22.0

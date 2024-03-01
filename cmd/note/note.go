@@ -2,8 +2,8 @@ package main
 
 import (
 	"bufio"
+	"example.com/gosamples/internal/note"
 	"fmt"
-	"github.com/Dethblo/godethblo/internal/note"
 	"os"
 	"strings"
 )

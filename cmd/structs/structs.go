@@ -1,8 +1,8 @@
 package main
 
 import (
+	"example.com/gosamples/internal/user"
 	"fmt"
-	"github.com/Dethblo/godethblo/internal/user"
 )
 
 func main() {

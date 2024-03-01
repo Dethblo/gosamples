@@ -1,4 +1,4 @@
-# godethblo
+# My GO Samples
 A collection of Go Language code used to experiment and try different concepts.
 
 # Setup
@@ -7,9 +7,9 @@ The code is set up to follow the GO language conventions for packaging.  The /cm
 Reference: `https://go.dev/doc/code`
 
 ## How the structure was created
-1. Create the godethblo project directory
-2. Change to the ./godethblo directory
-3. Using my Github.com repository Execute: `go mod init github.com/Dethblo/godethblo`
+1. Create the gosamples project directory
+2. Change to the ./gosamples directory
+3. Initialize the GO project: `go mod init example.com/gosamples`
 4. Create the `./cmd/hello` directory and `hello.go` source code.
 5. Execute the code: `go run cmd/hello/hello.go`
 6. Create other directories and code as needed.
